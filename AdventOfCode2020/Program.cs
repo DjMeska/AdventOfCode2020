@@ -27,40 +27,22 @@ namespace AdventOfCode2020
             int ansDay2Part1 = Register.Day2Part1Solve(day2);
             int ansDay2Part2 = Register.Day2Part2Solve(day2);
             Console.WriteLine(ansDay2Part1);
-            char[,] map = InOutUtils.ReadDay3("Day3.txt");
+            char[,] map = InOutUtils.ReadDay3("Day3.txt"); //Day3
             int tree = Register.Day3Part1Solve(map);
-            InOutUtils.ReadDay4("Day4.txt");
-            List<string> day5 = InOutUtils.ReadDay5("Day5.txt");
+            InOutUtils.ReadDay4("Day4.txt"); //Day4
+            List<string> day5 = InOutUtils.ReadDay5("Day5.txt"); //Day5
             Register.Day5Part1Solve(day5);
-            InOutUtils.ReadDay6Part1("Day6.txt");
-            InOutUtils.ReadDay6Part2("Day6.txt");*/
-            Register.Day7Part1Solve(InOutUtils.ReadDay7("Day7.txt"));
-           
+            InOutUtils.ReadDay6Part1("Day6.txt"); //Day 6
+            InOutUtils.ReadDay6Part2("Day6.txt");
+            Console.WriteLine(Register.Day7Part1Solve(InOutUtils.ReadDay7("Day7.txt"))); //Day7
+           */
+            Console.WriteLine(Register.Day8Part1(InOutUtils.ReadDay8("Day8.txt")));
 
-            /*Part2
-            List<string> Foundbags2 = new List<string>();
-            for (int i = 0; i < copylist.Count; i++)
-                if (copylist[i].Maincolor == "shiny gold")
-                    for (int j = 0; j < copylist[i].bags.Count; j++)
-                        for (int k = copylist[i].bags[j].Number - 1; k >= 0; k--)
-                            Foundbags2.Add(copylist[i].bags[j].Color);
-
-            for (int a = 0; a < Foundbags2.Count; a++)
-                for (int i = 0; i < copylist.Count; i++)
-                    if (copylist[i].Maincolor == Foundbags2[a])
-                        for (int j = 0; j < copylist[i].bags.Count; j++)
-                            for (int k = copylist[i].bags[j].Number - 1; k >= 0; k--)
-                                Foundbags2.Add(copylist[i].bags[j].Color);
-
-
-
-            Console.WriteLine(Foundbags.Count);
-            Console.WriteLine(Foundbags2.Count);
-            Console.ReadKey();*/
             Console.ReadKey();
-            
+
+
         }
 
     }
-    
+
 }

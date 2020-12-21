@@ -18,7 +18,7 @@ namespace AdventOfCode2020
             {
                 for (int j = 0; j < copy.Length; j++)
                 {
-                    if(numbers[i] + copy[j] == 2020 && foundTwoNum == false)
+                    if (numbers[i] + copy[j] == 2020 && foundTwoNum == false)
                     {
                         ans = numbers[i] * copy[j];
                         foundTwoNum = true;
@@ -43,7 +43,7 @@ namespace AdventOfCode2020
                             foundTwoNum = true;
                         }
                     }
-                   
+
                 }
             }
             return ans;
@@ -56,13 +56,13 @@ namespace AdventOfCode2020
                 int CorrectLetters = 0;
                 for (int i = 0; i < day.pass.Length; i++)
                 {
-                    
-                    if(day.pass[i]==day.Letter)
+
+                    if (day.pass[i] == day.Letter)
                     {
                         CorrectLetters++;
                     }
                 }
-                if(CorrectLetters >= day.Num1 && CorrectLetters <= day.Num2)
+                if (CorrectLetters >= day.Num1 && CorrectLetters <= day.Num2)
                 {
                     //Good job
                 }
@@ -81,15 +81,15 @@ namespace AdventOfCode2020
                 bool FirstPos = false;
                 bool SecondPos = false;
                 bool longerThanPass = false;
-                if (day.Num1-1 > day.pass.Length || day.Num2-1 > day.pass.Length)
+                if (day.Num1 - 1 > day.pass.Length || day.Num2 - 1 > day.pass.Length)
                 {
                     longerThanPass = true;
                 }
-                if(!longerThanPass)
+                if (!longerThanPass)
                 {
-                    if (day.pass[day.Num1-1] == day.Letter)
+                    if (day.pass[day.Num1 - 1] == day.Letter)
                         FirstPos = true;
-                    if (day.pass[day.Num2-1] == day.Letter)
+                    if (day.pass[day.Num2 - 1] == day.Letter)
                         SecondPos = true;
                 }
                 if ((FirstPos == true && SecondPos == false) || (FirstPos == false && SecondPos == true))
@@ -109,13 +109,13 @@ namespace AdventOfCode2020
             int tree = 0;
             int x_pos = 1;
             int y_pos = 1;
-            while(y_pos < 324) 
+            while (y_pos < 324)
             {
-                
-                if (x_pos >=31)
+
+                if (x_pos >= 31)
                 {
                     x_pos = 1;
-                  
+
                 }
                 /*else if (x_pos >= 30)
                 {
@@ -131,7 +131,7 @@ namespace AdventOfCode2020
                 {
                     x_pos += 1;
                 }
-                if(y_pos +2 > 324)
+                if (y_pos + 2 > 324)
                 {
                     y_pos++;
                 }
@@ -139,13 +139,13 @@ namespace AdventOfCode2020
                 {
                     y_pos += 2;
                 }
-                   
 
-                if(map[y_pos-1,x_pos-1] == '#')
+
+                if (map[y_pos - 1, x_pos - 1] == '#')
                 {
                     tree++;
                 }
-            } 
+            }
             return tree;
         }
         public int Day5Part1Solve(List<string> day5)
@@ -212,10 +212,102 @@ namespace AdventOfCode2020
                             break;
                         }
             }
-            Console.WriteLine(Foundbags.Count);
-            //Console.WriteLine(Foundbags2.Count);
+            List<string> Foundbags2 = new List<string>();
+            for (int i = 0; i < copylist.Count; i++)
+                if (copylist[i].Maincolor == "shiny gold")
+                    for (int j = 0; j < copylist[i].bags.Count; j++)
+                        for (int k = copylist[i].bags[j].Number - 1; k >= 0; k--)
+                            Foundbags2.Add(copylist[i].bags[j].Color);
+
+            for (int a = 0; a < Foundbags2.Count; a++)
+                for (int i = 0; i < copylist.Count; i++)
+                    if (copylist[i].Maincolor == Foundbags2[a])
+                        for (int j = 0; j < copylist[i].bags.Count; j++)
+                            for (int k = copylist[i].bags[j].Number - 1; k >= 0; k--)
+                                Foundbags2.Add(copylist[i].bags[j].Color);
+
+            Console.WriteLine(Foundbags2.Count);
+
 
             return Foundbags.Count;
+        }
+        public int Day8Part1(List<Day8> day8)
+        {
+            int i = 0;
+            int acc = 0;
+            int memory = 0;
+            while (day8[i].Executed == false)
+            {
+
+                if (day8[i].Type == "acc")
+                {
+                    day8[i].Executed = true;
+                    acc += day8[i].Values;
+                    i++;
+                }
+                memory = i;
+                if (day8[i].Type == "jmp")
+                {
+                    day8[i].Executed = true;
+                    i += day8[i].Values;
+                }
+                if (day8[i].Type == "nop")
+                {
+                    day8[i].Executed = true;
+                    i++;
+                }
+                Console.WriteLine(day8[i].Type + " " + day8[i].Values);
+
+            }
+            return acc;
+        }
+        public void Day9Solve(List<long> Nums)
+        {
+            long invalid = 0;
+            for (int i = 25; i < Nums.Count; i++)
+            {
+                bool found = false;
+                for (int j = i - 25; j < i - 1; j++)
+                {
+                    for (int k = j + 1; k < i; k++)
+                    {
+                        if (Nums[j] + Nums[k] == Nums[i])
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) break;
+                }
+                if (!found)
+                {
+                    invalid = Nums[i];
+                    //Console.WriteLine($"Part 1: {invalid}");
+                    break;
+                }
+            }
+
+            for (int i = 0; i < Nums.Count; i++)
+            {
+                long sum = Nums[i];
+                long smallest = sum;
+                long largest = sum;
+                for (int j = i + 1; j < Nums.Count; j++)
+                {
+                    sum += Nums[j];
+                    if (sum > invalid)
+                        break;
+                    if (Nums[j] < smallest)
+                        smallest = Nums[j];
+                    if (Nums[j] > largest)
+                        largest = Nums[j];
+                    if (sum == invalid)
+                    {
+                        //Console.WriteLine($"Part 2: {smallest + largest}");
+                        return;
+                    }
+                }
+            }
         }
     }
 }

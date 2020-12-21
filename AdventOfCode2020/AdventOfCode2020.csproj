@@ -47,6 +47,7 @@
     <Compile Include="Contain.cs" />
     <Compile Include="Day2.cs" />
     <Compile Include="Day4.cs" />
+    <Compile Include="Day8.cs" />
     <Compile Include="InOutUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

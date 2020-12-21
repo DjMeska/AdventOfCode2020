@@ -59,11 +59,11 @@ namespace AdventOfCode2020
         {
             List<Day4> allData = new List<Day4>();
             string[] blocks = File.ReadAllText(fileName, Encoding.UTF8).Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            
+
             for (int i = 0; i < blocks.Count(); i++)
             {
 
-                blocks[i] = blocks[i].Replace('\r',' ');
+                blocks[i] = blocks[i].Replace('\r', ' ');
                 blocks[i] = blocks[i].Replace('\n', ' ');
                 blocks[i] = string.Join(" ", blocks[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries));
                 string[] Values = blocks[i].Split(' ');
@@ -71,8 +71,8 @@ namespace AdventOfCode2020
                 for (int j = 0; j < Values.Count(); j++)
                 {
                     string dataType = Values[j].Substring(0, 3);
-                    string data = Values[j].Substring(4, Values[j].Length-4);
-                    
+                    string data = Values[j].Substring(4, Values[j].Length - 4);
+
                     if (dataType == "byr")
                     {
                         dataClass[0] = data;
@@ -105,13 +105,13 @@ namespace AdventOfCode2020
                     {
                         dataClass[7] = data;
                     }
-                    
+
                 }
-                if(dataClass[7] == null)
+                if (dataClass[7] == null)
                 {
                     dataClass[7] = "Ignore";
                 }
-               
+
                 if (dataClass.Contains(null))
                 {
                     //skips
@@ -122,7 +122,7 @@ namespace AdventOfCode2020
                     allData.Add(temp);
                 }
 
-                
+
 
             }
             List<Day4> Returned = new List<Day4>();
@@ -157,7 +157,7 @@ namespace AdventOfCode2020
                 foreach (char answer in cleaned)
                 {
                     groupAnswers[answer] = groupAnswers.TryGetValue(answer, out int occurence) ? occurence + 1 : 1;
-                   
+
                 }
                 answers.Add(groupAnswers);
                 result += groupAnswers.Count;
@@ -220,8 +220,32 @@ namespace AdventOfCode2020
             }
             return mainbag;
         }
-
-    }    
+        public static List<Day8> ReadDay8(string fileName)
+        {
+            List<Day8> day8 = new List<Day8>();
+            string[] Lines = File.ReadAllLines(fileName);
+            foreach (string line in Lines)
+            {
+                string[] Values = line.Split(' ');
+                string type = Values[0];
+                int values = int.Parse(Values[1]);
+                Day8 temp = new Day8(type, values, false);
+                day8.Add(temp);
+            }
+            return day8;
+        }
+        public static List<long> ReadDay9(string fileName)
+        {
+            List<long> Nums = new List<long>();
+            var input = File.ReadAllText(fileName);
+            var lines = input.Split('\n');
+            foreach (var line in lines)
+            {
+                Nums.Add(long.Parse(line));
+            }
+            return Nums;
+        }
+    }
 }
 
 

@@ -245,6 +245,20 @@ namespace AdventOfCode2020
             }
             return Nums;
         }
+        public static List<int> ReadDay10(string fileName)
+        {
+            List<int> joltages = new List<int>();
+            joltages.Add(0);
+            var input = File.ReadAllText(fileName);
+            var lines = input.Split('\n');
+            foreach (var line in lines)
+            {
+                joltages.Add(int.Parse(line));
+            }
+            joltages.Sort();
+            joltages.Add(joltages[joltages.Count - 1] + 3);
+            return joltages;
+        }
     }
 }
 

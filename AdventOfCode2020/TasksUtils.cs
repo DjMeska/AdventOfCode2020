@@ -292,6 +292,7 @@ namespace AdventOfCode2020
                 long sum = Nums[i];
                 long smallest = sum;
                 long largest = sum;
+
                 for (int j = i + 1; j < Nums.Count; j++)
                 {
                     sum += Nums[j];
@@ -308,6 +309,57 @@ namespace AdventOfCode2020
                     }
                 }
             }
+        }
+        public void Day10Part1(List<int> joltages)
+        {
+            int[] joltageRangeCounts = new int[3];  //Stores the histogram of joltages for gaps of 1,2, and 3 (in positions 0,1,2)
+            GenerateJoltageHistogram(joltageRangeCounts, joltages);
+            int oneJoltDifferences = joltageRangeCounts[0];
+            int threeJoltDifferences = joltageRangeCounts[2];
+
+
+            Console.WriteLine($"1-jolt Differences: {oneJoltDifferences}");
+            Console.WriteLine($"3-jolt Differences: {threeJoltDifferences}");
+            Console.WriteLine($"1-jolt differences multiplied by 3-jolt differences: { oneJoltDifferences * threeJoltDifferences}");
+        }
+        void GenerateJoltageHistogram(int[] joltageRangeCounts, List<int> joltages)
+        {
+            for (int i = 0; i < joltages.Count - 1; i++)
+            {
+                int joltageRange = joltages[i + 1] - joltages[i];
+
+                joltageRangeCounts[joltageRange - 1]++;
+            }
+        }
+        public void Day10Part2(List<int> joltages)
+        {
+            List<int> oneJoltRunLengths = new List<int>();
+            int contiguousCount = 0;
+            for (int i = 0; i < joltages.Count - 1; i++)
+            {
+                if (joltages[i + 1] - joltages[i] == 1)
+                {
+                    contiguousCount++;
+                }
+                else
+                {
+                    contiguousCount--;
+                    if (contiguousCount >= 1)
+                    {
+                        oneJoltRunLengths.Add(contiguousCount);
+                    }
+                    contiguousCount = 0;
+                }
+
+            }
+            long totalCombinations = 1;
+            int[] runCombinations = { 1, 2, 4, 7 };
+            foreach (int c in oneJoltRunLengths)
+            {
+                totalCombinations *= runCombinations[c];
+            }
+
+            Console.WriteLine($"Total number of adapter combinations: {totalCombinations}");
         }
     }
 }

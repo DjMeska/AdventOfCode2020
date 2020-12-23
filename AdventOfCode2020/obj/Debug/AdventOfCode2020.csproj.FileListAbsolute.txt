@@ -5,3 +5,10 @@ H:\AdventOfCode2020\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020
 H:\AdventOfCode2020\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.csproj.CoreCompileInputs.cache
 H:\AdventOfCode2020\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.exe
 H:\AdventOfCode2020\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.pdb
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\bin\Debug\AdventOfCode2020.exe.config
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\bin\Debug\AdventOfCode2020.exe
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\bin\Debug\AdventOfCode2020.pdb
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.csprojAssemblyReference.cache
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.csproj.CoreCompileInputs.cache
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.exe
+D:\Dokumentai ir darbai\AdventOfCode\AdventOfCode2020\AdventOfCode2020\obj\Debug\AdventOfCode2020.pdb

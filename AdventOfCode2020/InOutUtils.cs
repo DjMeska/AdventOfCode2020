@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace AdventOfCode2020
 {
     class InOutUtils
@@ -258,6 +259,17 @@ namespace AdventOfCode2020
             joltages.Sort();
             joltages.Add(joltages[joltages.Count - 1] + 3);
             return joltages;
+        }
+        public static List<string> ReadDay11(string fileName)
+        {
+
+            var text = File.ReadAllText(fileName);
+            List<string> input = new List<string>();
+            var lines = text.Split('\n');
+            foreach (var line in lines)
+                input.Add(line);
+            return input;
+            
         }
     }
 }

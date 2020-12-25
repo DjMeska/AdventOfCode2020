@@ -269,7 +269,98 @@ namespace AdventOfCode2020
             foreach (var line in lines)
                 input.Add(line);
             return input;
-            
+
+        }
+        public static void SolveDay12(string fileName)
+        {
+            string[] input = File.ReadAllLines("Day12.txt");
+            int[] waypoint = { 1, 10 };
+            int northSouth = 0;
+            int eastWest = 0;
+            int wpNS = 0;
+            int wpEW = 0;
+            char facing = 'E';
+            foreach (string line in input)
+            {
+                int value = int.Parse(line.Substring(1));
+                string direction = line.Substring(0, 1);
+                if (direction == "N")
+                {
+                    northSouth += value;
+                    waypoint[0] += value;
+                }
+            }
+            foreach (string s in input)
+            {
+                int value = int.Parse(s.Substring(1));
+                string direction = s.Substring(0, 1);
+                if (direction == "N")
+                {
+                    northSouth += value;
+                    waypoint[0] += value;
+                }
+                else if (direction == "E")
+                {
+                    eastWest += value;
+                    waypoint[1] += value;
+                }
+                else if (direction == "S")
+                {
+                    northSouth -= value;
+                    waypoint[0] -= value;
+                }
+                else if (direction == "W")
+                {
+                    eastWest -= value;
+                    waypoint[1] -= value;
+                }
+                else if (direction == "F")
+                {
+                    wpNS += waypoint[0] * value;
+                    wpEW += waypoint[1] * value;
+                    if (facing == 'N')
+                        northSouth += value;
+                    else if (facing == 'E')
+                        eastWest += value;
+                    else if (facing == 'S')
+                        northSouth -= value;
+                    else if (facing == 'W')
+                        eastWest -= value;
+                }
+                else
+                {
+                    int rotation = value;
+                    for (int i = 0; i < (rotation / 90); i++)
+                    {
+                        if (direction == "L")
+                        {
+                            waypoint = new int[] { waypoint[1], waypoint[0] * -1 };
+                            if (facing == 'N')
+                                facing = 'W';
+                            else if (facing == 'E')
+                                facing = 'N';
+                            else if (facing == 'S')
+                                facing = 'E';
+                            else if (facing == 'W')
+                                facing = 'S';
+                        }
+                        else if (direction == "R")
+                        {
+                            waypoint = new int[] { waypoint[1] * -1, waypoint[0] };
+                            if (facing == 'N')
+                                facing = 'E';
+                            else if (facing == 'E')
+                                facing = 'S';
+                            else if (facing == 'S')
+                                facing = 'W';
+                            else if (facing == 'W')
+                                facing = 'N';
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Part 1: {0}", Math.Abs(northSouth) + Math.Abs(eastWest));
+            Console.WriteLine("Part 2: {0}", Math.Abs(wpNS) + Math.Abs(wpEW));
         }
     }
 }

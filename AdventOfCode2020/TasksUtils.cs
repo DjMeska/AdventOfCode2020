@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace AdventOfCode2020
 {
@@ -471,6 +472,74 @@ namespace AdventOfCode2020
             Console.WriteLine(seats);
             Console.WriteLine(seats2);
 
+        }
+        public void Day13Part1(List<int> buses)
+        {
+            int departure = buses[buses.Count-1];
+            buses.RemoveAt(buses.Count - 1);
+          
+            int bestTime = int.MaxValue;
+            int bestService = -1;
+
+            foreach (int bus in buses)
+            {
+                int time = bus;
+                while (time < departure)
+                {
+                    time += bus;
+                }
+                if (bestTime - departure > time - departure)
+                {
+                    bestTime = time;
+                    bestService = bus;
+                }
+            }
+            Console.WriteLine("Timestamp: {0}", departure);
+            Console.WriteLine("Best service: {0}, Best time: {1}", bestService, bestTime);
+            Console.WriteLine("Wait time: {0}, Wait time X ID: {1}", bestTime - departure, bestService * (bestTime - departure));
+
+        }
+        private struct Pair
+        {
+            public uint id;
+            public uint offset;
+        }
+        public void Day13Part2(string fileName)
+        {
+            string[] lines = File.ReadLines(fileName).ToArray();
+            List<Pair> buses = new List<Pair>();
+
+            uint i = 0; //cant hold negative
+            foreach (string s in lines[1].Split(','))
+            {
+                if (s != "x")
+                {
+                    Pair pair = new Pair
+                    {
+                        id = uint.Parse(s),
+                        offset = i
+                    };
+                    buses.Add(pair);
+
+                    Console.WriteLine("Service {0}, offset {1}", pair.id, pair.offset);
+                }
+                i++;
+            }
+
+            ulong step = buses[0].id;
+            ulong timestamp = buses[0].id;
+
+            foreach (Pair pair in buses.Skip(1))
+            {
+                while ((timestamp + pair.offset) % pair.id != 0)
+                {
+                    timestamp = checked(timestamp + step);
+                }
+                Console.WriteLine("Timestamp {0} is valid for service {1}", timestamp, pair.id);
+                step = step * pair.id;
+            }
+
+            Console.WriteLine("First valid timestamp: " + timestamp);
         }
     }
 }

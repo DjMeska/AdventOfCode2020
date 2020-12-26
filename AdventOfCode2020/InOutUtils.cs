@@ -362,17 +362,6 @@ namespace AdventOfCode2020
             Console.WriteLine("Part 1: {0}", Math.Abs(northSouth) + Math.Abs(eastWest));
             Console.WriteLine("Part 2: {0}", Math.Abs(wpNS) + Math.Abs(wpEW));
         }
-        public static List<int> ReadDay13(string fileName)
-        {
-            int departure = 0;
-            List<int> buses;
-            var lines = File.ReadAllLines(fileName);
-            departure = int.Parse(lines[0]);
-            buses = lines[1].Split(',').Select(d => d != "x" ? int.Parse(d) : 0).Where(d => d != 0).ToList();
-            buses.Sort();
-            buses.Add(departure);
-            return buses;
-        }
     }
 }
 

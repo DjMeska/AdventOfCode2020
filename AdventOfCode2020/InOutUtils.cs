@@ -361,7 +361,28 @@ namespace AdventOfCode2020
             }
             Console.WriteLine("Part 1: {0}", Math.Abs(northSouth) + Math.Abs(eastWest));
             Console.WriteLine("Part 2: {0}", Math.Abs(wpNS) + Math.Abs(wpEW));
+
         }
+        public static int Day15(int end, params int[] Nums)
+        {
+            int position = 0;
+            int lastNumber = Nums.Last();
+            var positions = new int[end];
+            foreach (var number in Nums)
+                positions[number] = ++position;
+
+            while (position < end)
+            {
+                int lastPosition = positions[lastNumber];
+                int nextNumber = lastPosition != 0 ? position - lastPosition : 0;
+                positions[lastNumber] = position++;
+                lastNumber = nextNumber;
+            }
+
+            return lastNumber;
+        }
+
+      
     }
 }
 

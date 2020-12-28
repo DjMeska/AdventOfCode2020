@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.RegularExpressions;
 
 
 namespace AdventOfCode2020
@@ -382,9 +383,110 @@ namespace AdventOfCode2020
             return lastNumber;
         }
 
-      
+        public static void ReadDay16(string fileName)
+        {
+            string[] input = File.ReadAllLines(fileName);
+            HashSet<int> validNumber = new HashSet<int>();
+            List<Day16> fields = new List<Day16>();
+            List<int[]> tickets = new List<int[]>();
+            List<int[]> validTickets = new List<int[]>();
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (i < 20)
+                {
+                    string[] fieldSplit = input[i].Split(new string[] { "-", ": ", " or " }, StringSplitOptions.RemoveEmptyEntries);
+                    int range1Low = int.Parse(fieldSplit[1]), range1High = int.Parse(fieldSplit[2]);
+                    int range2Low = int.Parse(fieldSplit[3]), range2High = int.Parse(fieldSplit[4]);
+                    for (int x = range1Low; x <= range1High; x++)
+                    {
+                        if (!validNumber.Contains(x))
+                            validNumber.Add(x);
+                    }
+                    for (int x = range2Low; x <= range2High; x++)
+                    {
+                        if (!validNumber.Contains(x))
+                            validNumber.Add(x);
+                    }
+                    fields.Add(new Day16(fieldSplit[0], new int[] { range1Low, range1High }, new int[] { range2Low, range2High }));
+                }
+                else if (i >= 25 || i == 22)
+                {
+                    string[] ticketNumbers = input[i].Split(',');
+                    int[] ticket = new int[ticketNumbers.Length];
+                    for (int t = 0; t < ticketNumbers.Length; t++)
+                        ticket[t] = int.Parse(ticketNumbers[t]);
+                    tickets.Add(ticket);
+                }
+            }
+
+            int part1 = 0;
+            bool isValid;
+            foreach (int[] ticket in tickets)
+            {
+                isValid = true;
+                foreach (int n in ticket)
+                {
+                    if (!validNumber.Contains(n))
+                    {
+                        part1 += n;
+                        isValid = false;
+                    }
+                }
+                if (isValid)
+                    validTickets.Add(ticket);
+            }
+            Console.WriteLine(part1);
+
+            long part2 = 1;
+            foreach (Day16 f in fields)
+            {
+                for (int tNum = 0; tNum < validTickets[0].Length; tNum++)
+                {
+                    for (int ticket = 0; ticket < validTickets.Count; ticket++)
+                    {
+                        if ((validTickets[ticket][tNum] >= f.Range1[0] && validTickets[ticket][tNum] <= f.Range1[1]) ||
+                            (validTickets[ticket][tNum] >= f.Range2[0] && validTickets[ticket][tNum] <= f.Range2[1]))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            f.possibleIndex.Remove(tNum);
+                            break;
+                        }
+                    }
+                }
+            }
+            int fieldCound = fields.Count(), count;
+            do
+            {
+                count = 0;
+                foreach (Day16 f in fields)
+                {
+                    if (f.possibleIndex.Count == 1)
+                    {
+                        foreach (Day16 fi in fields)
+                        {
+                            if (fi != f)
+                            {
+                                fi.possibleIndex.Remove(f.possibleIndex[0]);
+                            }
+                        }
+                    }
+                    count += f.possibleIndex.Count();
+                }
+            } while (count != fieldCound);
+            foreach (Day16 f in fields)
+            {
+                if (f.Name.Contains("departure"))
+                    part2 *= validTickets[0][f.possibleIndex[0]];
+            }
+            Console.WriteLine(part2);
+
+        }
     }
 }
+
 
 
 

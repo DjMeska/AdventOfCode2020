@@ -75,6 +75,7 @@ namespace AdventOfCode2020
             }
             return wrongpass;
         }
+       
         public int Day2Part2Solve(List<Day2> day2)
         {
             int wrongpass = 0;
@@ -552,6 +553,5 @@ namespace AdventOfCode2020
         }
 
         
-
     }
 }

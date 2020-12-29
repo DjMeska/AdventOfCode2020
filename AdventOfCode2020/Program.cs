@@ -43,7 +43,8 @@ namespace AdventOfCode2020
             InOutUtils.SolveDay12("Day12.txt");
             Console.WriteLine("Part 1: " + InOutUtils.Day15(2020, 0, 14, 6, 20, 1, 4));
             Console.WriteLine("Part 2: " + InOutUtils.Day15(30000000, 0, 14, 6, 20, 1, 4));*/
-            InOutUtils.ReadDay16("Day16.txt");
+            Register.Day18Part1("Day18.txt");
+            Register.Day18Part2("Day18.txt");
             
             
             

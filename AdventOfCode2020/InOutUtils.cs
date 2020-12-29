@@ -484,6 +484,8 @@ namespace AdventOfCode2020
             Console.WriteLine(part2);
 
         }
+       
+
     }
 }
 
